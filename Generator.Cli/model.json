@@ -1,0 +1,41 @@
+﻿{
+	"Entities": [
+		{
+			"Name": "Person",
+			"Attributes": [
+				{
+					"Name": "Name",
+					"AttributeType": "string"
+				},
+				{
+					"Name": "Date of Birth",
+					"AttributeType": "DateTime"
+				}
+			]
+		},
+		{
+			"Name": "Shop",
+			"Attributes": [
+				{
+					"Name": "Name",
+					"AttributeType": "string"
+				},
+				{
+					"Name": "Address",
+					"AttributeType": "string"
+				}
+			]
+		}
+	],
+	"Pages": [
+		{
+			"Name": "Home"
+		},
+		{
+			"Name": "About"
+		},
+		{
+			"Name": "Contact Us"
+		}
+	]
+}

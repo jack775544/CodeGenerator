@@ -1,0 +1,21 @@
+﻿<#@ template language="C#" inherits="AbstractTemplate<Page>" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Generator.Cli.Core" #>
+<#@ import namespace="Generator.Cli.Metamodel" #>
+This page is called <#= Model.Name #>
+<#+
+	private readonly IEnumerable<Page> _pages;
+
+	public PageTemplate(IEnumerable<Page> pages)
+	{
+		_pages = pages;
+	}
+
+	public override string OutputPath => $"Pages/{Model.Name}Page.cs";
+
+	public override IEnumerable<Page> MapObjects()
+	{
+		return _pages;
+	}
+#>

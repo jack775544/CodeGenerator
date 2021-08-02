@@ -1,0 +1,31 @@
+<#@ template language="C#" inherits="AbstractTemplate<Entity>" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Generator.Cli.Core" #>
+<#@ import namespace="Generator.Cli.Metamodel" #>
+The name of my entity is <#= Model.Name #>
+And the attributes are:
+<#
+	foreach (var attribute in Model.Attributes)
+	{
+#>
+	Name: <#= attribute.Name #>, Type: <#= attribute.AttributeType #>
+<#
+	}
+#>
+
+<#+
+	private readonly IEnumerable<Entity> _entities;
+
+	public EntityTemplate(IEnumerable<Entity> entities)
+	{
+		_entities = entities;
+	}
+
+	public override string OutputPath => $"Models/{Model.Name}.cs";
+
+	public override IEnumerable<Entity> MapObjects()
+	{
+		return _entities;
+	}
+#>

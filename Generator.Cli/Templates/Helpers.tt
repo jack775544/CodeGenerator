@@ -1,0 +1,8 @@
+﻿<#@ template language="C#" inherits="AbstractSingleTemplate" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Generator.Cli.Core" #>
+This is a simple helper file. There is only one of these.
+<#+
+	public override string OutputPath => "Helpers.cs";
+#>
