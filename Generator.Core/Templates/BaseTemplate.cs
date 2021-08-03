@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Generator.Core
+namespace Generator.Core.Templates
 {
     using System;
     
@@ -15,7 +15,7 @@ namespace Generator.Core
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Jack\repo\CodeGenerator\Generator.Core\BaseTemplate.tt"
+    #line 1 "C:\Users\Jack\repo\CodeGenerator\Generator.Core\Templates\BaseTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class BaseTemplate : BaseTemplateBase
     {

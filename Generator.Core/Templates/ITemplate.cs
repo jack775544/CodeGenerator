@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Generator.Core
+namespace Generator.Core.Templates
 {
 	public interface ITemplate<T>
 	{

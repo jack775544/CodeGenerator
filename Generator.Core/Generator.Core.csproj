@@ -10,14 +10,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="BaseTemplate.tt">
+    <None Update="Templates\BaseTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BaseTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="BaseTemplate.cs">
+    <Compile Update="Templates\BaseTemplate.cs">
       <DependentUpon>BaseTemplate.tt</DependentUpon>
     </Compile>
   </ItemGroup>

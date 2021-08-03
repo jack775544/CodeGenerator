@@ -1,5 +1,5 @@
 ﻿<#@ template language="C#" inherits="AbstractSingleTemplate" #>
-<#@ import namespace="Generator.Core" #>
+<#@ import namespace="Generator.Core.Templates" #>
 This is a simple helper file. There is only one of these.
 <#+
 	public override string OutputPath => "Helpers.cs";

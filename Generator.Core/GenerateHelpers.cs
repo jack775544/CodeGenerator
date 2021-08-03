@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Generator.Core.Templates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Generator.Core

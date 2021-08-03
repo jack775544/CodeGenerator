@@ -29,6 +29,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Helpers.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\PageTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Helpers.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Helpers.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup>

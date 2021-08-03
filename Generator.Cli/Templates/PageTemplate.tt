@@ -1,7 +1,7 @@
 ﻿<#@ template language="C#" inherits="AbstractTemplate<Page>" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Generator.Cli.Metamodel" #>
-<#@ import namespace="Generator.Core" #>
+<#@ import namespace="Generator.Core.Templates" #>
 This page is called <#= Model.Name #>
 <#+
 	private readonly IEnumerable<Page> _pages;

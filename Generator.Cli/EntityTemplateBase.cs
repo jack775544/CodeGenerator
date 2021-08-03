@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Generator.Cli.Metamodel;
-using Generator.Core;
+using Generator.Core.Templates;
 
 namespace Generator.Cli
 {

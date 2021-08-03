@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Generator.Core
+namespace Generator.Core.Templates
 {
 	public partial class BaseTemplate
 	{
