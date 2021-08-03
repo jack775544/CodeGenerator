@@ -1,7 +1,6 @@
 <#@ template language="C#" inherits="AbstractTemplate<Entity>" #>
-<#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="Generator.Cli.Core" #>
+<#@ import namespace="Generator.Core" #>
 <#@ import namespace="Generator.Cli.Metamodel" #>
 The name of my entity is <#= Model.Name #>
 And the attributes are:

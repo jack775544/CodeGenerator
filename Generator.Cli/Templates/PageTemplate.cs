@@ -9,10 +9,9 @@
 // ------------------------------------------------------------------------------
 namespace Generator.Cli.Templates
 {
-    using System.Text;
     using System.Collections.Generic;
-    using Generator.Cli.Core;
     using Generator.Cli.Metamodel;
+    using Generator.Core;
     using System;
     
     /// <summary>
@@ -31,7 +30,7 @@ namespace Generator.Cli.Templates
         {
             this.Write("This page is called ");
             
-            #line 6 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\PageTemplate.tt"
+            #line 5 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\PageTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -40,7 +39,7 @@ namespace Generator.Cli.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 7 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\PageTemplate.tt"
+        #line 6 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\PageTemplate.tt"
 
 	private readonly IEnumerable<Page> _pages;
 

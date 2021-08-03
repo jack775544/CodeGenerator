@@ -10,14 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Mono.TextTemplating" Version="2.2.1" />
+    <ProjectReference Include="../Generator.Core/Generator.Core.csproj" />
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Update="Core\BaseTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BaseTemplate.tt</DependentUpon>
-    </Compile>
     <Compile Update="Templates\EntityTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -36,10 +32,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Update="Core\BaseTemplate.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>BaseTemplate.cs</LastGenOutput>
-    </None>
     <None Update="Templates\EntityTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EntityTemplate.cs</LastGenOutput>
