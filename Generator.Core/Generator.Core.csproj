@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <Compile Update="Templates\BaseTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>BaseTemplate.tt</DependentUpon>
     </Compile>
   </ItemGroup>

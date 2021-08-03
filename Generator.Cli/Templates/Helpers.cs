@@ -9,7 +9,6 @@
 // ------------------------------------------------------------------------------
 namespace Generator.Cli.Templates
 {
-    using Generator.Core;
     using Generator.Core.Templates;
     using System;
     
@@ -31,7 +30,7 @@ namespace Generator.Cli.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 5 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\Helpers.tt"
+        #line 4 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\Helpers.tt"
 
 	public override string OutputPath => "Helpers.cs";
 

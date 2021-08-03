@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Generator.Core.Templates;
+using Generator.Core.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Generator.Core
@@ -11,6 +12,8 @@ namespace Generator.Core
 	{
 		private readonly Assembly _generatingAssembly;
 		private readonly IServiceCollection _serviceCollection;
+		private readonly List<Type> _templateTypes = new();
+		private readonly List<Type> _validationTypes = new();
 
 		public CodeGenerator(TModel model, Assembly generatingAssembly)
 		{
@@ -27,11 +30,45 @@ namespace Generator.Core
 			return this;
 		}
 
+		public CodeGenerator<TModel> AddTemplateType<TTemplate, TEntity>()
+			where TTemplate : ITemplate<TEntity>
+		{
+			_templateTypes.Add(typeof(TTemplate));
+			return this;
+		}
+		
+		public CodeGenerator<TModel> AutoWireTemplateTypes()
+		{
+			_templateTypes.AddRange(GenerateHelpers.GetTemplateTypes(_generatingAssembly));
+			return this;
+		}
+		
+		public CodeGenerator<TModel> AddValidatorType<TRule, TEntity>()
+			where TRule : IValidationRule<TEntity>
+		{
+			_validationTypes.Add(typeof(TRule));
+			return this;
+		}
+		
+		public CodeGenerator<TModel> AutoWireValidationTypes()
+		{
+			_validationTypes.AddRange(GenerateHelpers.GetValidationTypes(_generatingAssembly));
+			return this;
+		}
+
 		public IEnumerable<GenerationResult> GenerateAll()
 		{
 			var serviceProvider = _serviceCollection.BuildServiceProvider();
-			return GenerateHelpers.GetTemplateTypes(_generatingAssembly)
+			return _templateTypes
 				.Select(x => GenerateHelpers.InvokeTemplate(serviceProvider, x))
+				.SelectMany(x => x);
+		}
+
+		public IEnumerable<ValidationResult> ValidateAll()
+		{
+			var serviceProvider = _serviceCollection.BuildServiceProvider();
+			return _validationTypes
+				.Select(x => GenerateHelpers.InvokeValidation(serviceProvider, x))
 				.SelectMany(x => x);
 		}
 		

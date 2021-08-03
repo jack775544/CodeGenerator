@@ -5,7 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Generator.Cli.Metamodel;
+using Generator.Cli.Validation;
 using Generator.Core;
+using Generator.Core.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Generator.Cli
@@ -23,9 +25,25 @@ namespace Generator.Cli
 			}
 
 			var generator = new CodeGenerator<Model>(model, typeof(Program).Assembly)
+				.AutoWireTemplateTypes()
+				.AutoWireValidationTypes()
 				.AddMetaModelType(_ => model.Entities)
 				.AddMetaModelType(_ => model.Entities.SelectMany(x => x.Attributes).ToList())
 				.AddMetaModelType(_ => model.Pages);
+
+			var failedValidationResults = generator.ValidateAll()
+				.Where(x => x is FailedValidationResult)
+				.ToList();
+
+			if (failedValidationResults.Any())
+			{
+				foreach (var result in failedValidationResults)
+				{
+					Console.Error.WriteLine(result.Message);
+				}
+
+				return;
+			}
 
 			// Now generate the code.
 			var results = generator.GenerateAll();
