@@ -28,6 +28,7 @@ namespace Generator.Core
 		{
 			return generatingAssembly
 				.GetTypes()
+				.Where(x => !x.IsAbstract && !x.IsInterface)
 				.Where(x => x.GetInterfaces()
 					.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ITemplate<>)));
 		}

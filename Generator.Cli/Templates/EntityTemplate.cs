@@ -10,7 +10,6 @@
 namespace Generator.Cli.Templates
 {
     using System.Collections.Generic;
-    using Generator.Core;
     using Generator.Cli.Metamodel;
     using System;
     
@@ -20,7 +19,7 @@ namespace Generator.Cli.Templates
     
     #line 1 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class EntityTemplate : AbstractTemplate<Entity>
+    public partial class EntityTemplate : EntityTemplateBase
     {
 #line hidden
         /// <summary>
@@ -30,14 +29,14 @@ namespace Generator.Cli.Templates
         {
             this.Write("The name of my entity is ");
             
-            #line 5 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
+            #line 4 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("\r\nAnd the attributes are:\r\n");
             
-            #line 7 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
+            #line 6 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
 
 	foreach (var attribute in Model.Attributes)
 	{
@@ -47,21 +46,21 @@ namespace Generator.Cli.Templates
             #line hidden
             this.Write("\tName: ");
             
-            #line 11 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
+            #line 10 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(attribute.Name));
             
             #line default
             #line hidden
             this.Write(", Type: ");
             
-            #line 11 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
+            #line 10 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(attribute.AttributeType));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 12 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
+            #line 11 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
 
 	}
 
@@ -72,20 +71,12 @@ namespace Generator.Cli.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 16 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
-
-	private readonly IEnumerable<Entity> _entities;
-
-	public EntityTemplate(IEnumerable<Entity> entities)
-	{
-		_entities = entities;
-	}
+        #line 15 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
 
 	public override string OutputPath => $"Models/{Model.Name}.cs";
 
-	public override IEnumerable<Entity> MapObjects()
+	public EntityTemplate(IEnumerable<Entity> entities) : base(entities)
 	{
-		return _entities;
 	}
 
         
