@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Generator.Core.Metamodel;
 using Generator.Core.Templates;
 using Generator.Core.Validation;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +30,7 @@ namespace Generator.Core
 			}
 		}
 
-		public static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule)
+		public static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule) where T : MetamodelNode
 		{
 			foreach (var entity in rule.MapObjects())
 			{

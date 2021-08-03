@@ -1,6 +1,8 @@
-﻿namespace Generator.Cli.Metamodel
+﻿using Generator.Core.Metamodel;
+
+namespace Generator.Cli.Metamodel
 {
-	public class Page
+	public class Page : MetamodelNode, INamedNode
 	{
 		public string Name { get; set; }
 	}

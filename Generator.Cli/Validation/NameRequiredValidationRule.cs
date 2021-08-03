@@ -17,7 +17,7 @@ namespace Generator.Cli.Validation
 		{
 			if (string.IsNullOrWhiteSpace(Model.Name))
 			{
-				return new FailedValidationResult($"An entity has an invalid name");
+				return new FailedValidationResult($"An entity with an id of {Model.Id} has a missing name");
 			}
 
 			return new SuccessfulValidationResult();

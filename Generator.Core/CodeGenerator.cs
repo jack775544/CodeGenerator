@@ -1,19 +1,26 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
+using Generator.Core.Metamodel;
 using Generator.Core.Templates;
+using Generator.Core.Utility;
 using Generator.Core.Validation;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Generator.Core
 {
 	public class CodeGenerator<TModel> where TModel : class
 	{
 		private readonly Assembly _generatingAssembly;
-		private readonly IServiceCollection _serviceCollection;
+		public readonly IServiceCollection _serviceCollection;
 		private readonly List<Type> _templateTypes = new();
 		private readonly List<Type> _validationTypes = new();
+		private readonly Dictionary<Type, List<Func<IServiceProvider, IEnumerable<object>>>> _typeLookup = new();
 
 		public CodeGenerator(TModel model, Assembly generatingAssembly)
 		{
@@ -24,9 +31,37 @@ namespace Generator.Core
 
 		public CodeGenerator<TModel> AddMetaModelType<T>(
 			Func<IServiceProvider, IEnumerable<T>> implementationFactory)
-			where T : class
+			where T : MetamodelNode
 		{
 			_serviceCollection.AddSingleton(implementationFactory);
+			var metamodelType = typeof(T);
+			
+			// Register each interface on the node
+			foreach (var nodeInterface in GetBaseTypes(metamodelType))
+			{
+				_serviceCollection.Configure<ServiceFactory>(nodeInterface.AssemblyQualifiedName, f =>
+				{
+					f.AddFactory(implementationFactory);
+				});
+				var generic = typeof(IEnumerable<>).MakeGenericType(nodeInterface);
+				_serviceCollection.TryAdd(new ServiceDescriptor(
+					generic,
+					sp =>
+					{
+						var items = sp
+							.GetRequiredService<IOptionsSnapshot<ServiceFactory>>()
+							.Get(nodeInterface.AssemblyQualifiedName)
+							.Invoke(sp)
+							.SelectMany(x => x);
+						var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(nodeInterface));
+						foreach (var item in items)
+						{
+							list.Add(item);
+						}
+						return list;
+					},
+					ServiceLifetime.Singleton));
+			}
 			return this;
 		}
 
@@ -45,6 +80,7 @@ namespace Generator.Core
 		
 		public CodeGenerator<TModel> AddValidatorType<TRule, TEntity>()
 			where TRule : IValidationRule<TEntity>
+			where TEntity : MetamodelNode
 		{
 			_validationTypes.Add(typeof(TRule));
 			return this;
@@ -75,6 +111,21 @@ namespace Generator.Core
 		public static IEnumerable<GenerationResult> Generate<T>(ITemplate<T> template)
 		{
 			return GenerateHelpers.Generate(template);
+		}
+
+		private static IEnumerable<Type> GetBaseTypes(Type type)
+		{
+			var types = new List<Type>();
+			types.AddRange(type.GetInterfaces());
+
+			var t = type;
+			while (t.BaseType != null)
+			{
+				types.Add(t.BaseType);
+				t = t.BaseType;
+			}
+
+			return types;
 		}
 	}
 }

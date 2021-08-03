@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Generator.Cli.Metamodel;
-using Generator.Cli.Validation;
 using Generator.Core;
 using Generator.Core.Validation;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +28,7 @@ namespace Generator.Cli
 				.AddMetaModelType(_ => model.Entities)
 				.AddMetaModelType(_ => model.Entities.SelectMany(x => x.Attributes).ToList())
 				.AddMetaModelType(_ => model.Pages);
+			generator._serviceCollection.BuildServiceProvider().GetRequiredService<IEnumerable<INamedNode>>();
 
 			var failedValidationResults = generator.ValidateAll()
 				.Where(x => x is FailedValidationResult)
