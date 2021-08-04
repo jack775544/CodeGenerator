@@ -30,7 +30,7 @@ namespace Generator.Core
 			}
 		}
 
-		public static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule) where T : MetamodelNode
+		public static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule) where T : IMetamodelNode
 		{
 			foreach (var entity in rule.MapObjects())
 			{

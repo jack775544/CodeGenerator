@@ -2,7 +2,7 @@
 
 namespace Generator.Core.Metamodel
 {
-	public class MetamodelNode : IMetamodelNode
+	public class BaseModel : IMetamodelNode
 	{
 		public Guid Id { get; set; }
 	}

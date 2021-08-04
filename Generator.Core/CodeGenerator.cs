@@ -2,36 +2,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using Generator.Core.Metamodel;
 using Generator.Core.Templates;
 using Generator.Core.Utility;
 using Generator.Core.Validation;
+using Generator.Core.Validation.Rules;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
 namespace Generator.Core
 {
-	public class CodeGenerator<TModel> where TModel : class
+	public class CodeGenerator<TModel> where TModel : BaseModel
 	{
 		private readonly Assembly _generatingAssembly;
-		public readonly IServiceCollection _serviceCollection;
+		private readonly IServiceCollection _serviceCollection;
 		private readonly List<Type> _templateTypes = new();
 		private readonly List<Type> _validationTypes = new();
-		private readonly Dictionary<Type, List<Func<IServiceProvider, IEnumerable<object>>>> _typeLookup = new();
 
 		public CodeGenerator(TModel model, Assembly generatingAssembly)
 		{
 			_generatingAssembly = generatingAssembly;
 			_serviceCollection = new ServiceCollection();
 			_serviceCollection.AddSingleton(_ => model);
+			_serviceCollection.AddSingleton<BaseModel>(_ => model);
+			AddValidatorType<IdRequiredValidationRule, IMetamodelNode>();
+			AddValidatorType<UniqueIdValidator, BaseModel>();
 		}
 
 		public CodeGenerator<TModel> AddMetaModelType<T>(
 			Func<IServiceProvider, IEnumerable<T>> implementationFactory)
-			where T : MetamodelNode
+			where T : class, IMetamodelNode
 		{
 			_serviceCollection.AddSingleton(implementationFactory);
 			var metamodelType = typeof(T);
@@ -80,7 +82,7 @@ namespace Generator.Core
 		
 		public CodeGenerator<TModel> AddValidatorType<TRule, TEntity>()
 			where TRule : IValidationRule<TEntity>
-			where TEntity : MetamodelNode
+			where TEntity : IMetamodelNode
 		{
 			_validationTypes.Add(typeof(TRule));
 			return this;
@@ -111,6 +113,11 @@ namespace Generator.Core
 		public static IEnumerable<GenerationResult> Generate<T>(ITemplate<T> template)
 		{
 			return GenerateHelpers.Generate(template);
+		}
+		
+		public static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule) where T : IMetamodelNode
+		{
+			return GenerateHelpers.Validate(rule);
 		}
 
 		private static IEnumerable<Type> GetBaseTypes(Type type)

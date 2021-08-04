@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
-using Generator.Core.Metamodel;
 
 namespace Generator.Cli.Metamodel
 {
-	public class Entity : MetamodelNode, INamedNode
+	public record Entity : INamedNode
 	{
+		public Guid Id { get; set; }
 		public List<EntityAttribute> Attributes { get; set; }
 		public string Name { get; set; }
 	}

@@ -3,7 +3,7 @@ using Generator.Core.Metamodel;
 
 namespace Generator.Core.Validation
 {
-	public abstract class AbstractValidationRule<T> : IValidationRule<T> where T : MetamodelNode
+	public abstract class AbstractValidationRule<T> : IValidationRule<T> where T : IMetamodelNode
 	{
 		public T Model { get; set; }
 

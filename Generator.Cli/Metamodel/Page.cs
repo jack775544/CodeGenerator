@@ -1,9 +1,10 @@
-﻿using Generator.Core.Metamodel;
+﻿using System;
 
 namespace Generator.Cli.Metamodel
 {
-	public class Page : MetamodelNode, INamedNode
+	public record Page : INamedNode
 	{
+		public Guid Id { get; set; }
 		public string Name { get; set; }
 	}
 }

@@ -1,26 +1,32 @@
 ﻿{
 	"Entities": [
 		{
+			"Id": "929a3dc6-b4a4-4c0a-b426-2323ca094244",
 			"Name": "Person",
 			"Attributes": [
 				{
+					"Id": "baaaac9e-0b2b-4fce-af56-a487dfb755b5",
 					"Name": "Name",
 					"AttributeType": "string"
 				},
 				{
+					"Id": "43d53918-d565-4fae-9106-c2b11a6dabad",
 					"Name": "Date of Birth",
 					"AttributeType": "DateTime"
 				}
 			]
 		},
 		{
+			"Id": "fad241c8-c37c-410b-8d20-332e29b91664",
 			"Name": "Shop",
 			"Attributes": [
 				{
+					"Id": "4a26e44b-361c-479c-9dcf-7dbc7f6c4b49",
 					"Name": "Name",
 					"AttributeType": "string"
 				},
 				{
+					"Id": "1c69f8e7-84f3-4dd7-8429-2a1639b3c2ad",
 					"Name": "Address",
 					"AttributeType": "string"
 				}
@@ -29,12 +35,15 @@
 	],
 	"Pages": [
 		{
+			"Id": "33df2005-6724-4edf-bc4a-9da5277c048f",
 			"Name": "Home"
 		},
 		{
+			"Id": "5dabc283-fc6c-4e8c-94f8-0e0a6c8949be",
 			"Name": "About"
 		},
 		{
+			"Id": "79a18b4a-71d2-4524-a8e0-c276f0f6f6af",
 			"Name": "Contact Us"
 		}
 	]
