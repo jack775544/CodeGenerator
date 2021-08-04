@@ -7,7 +7,7 @@ using Generator.Core.Templates;
 using Generator.Core.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Generator.Core
+namespace Generator.Core.Utility
 {
 	internal static class GenerateHelpers
 	{

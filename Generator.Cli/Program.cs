@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using Generator.Cli.Metamodel;
 using Generator.Core;
 using Generator.Core.Validation;
+using Generator.JsonModel;
 
 namespace Generator.Cli
 {
@@ -12,21 +12,20 @@ namespace Generator.Cli
 	{
 		public static void Main(string[] args)
 		{
-			// Get the model
-			var model = JsonSerializer.Deserialize<Model>(File.ReadAllText(args[0]));
-			if (model == null)
+			var deserializerResult = JsonModelDeserializer.Deserialize<Model>(File.ReadAllText(args[0]));
+			if (deserializerResult.Model == null)
 			{
 				Console.Error.WriteLine("Invalid Model");
 				return;
 			}
 
 			// Create the generator
-			var generator = new CodeGenerator<Model>(model, typeof(Program).Assembly)
+			var generator = new CodeGenerator<Model>(deserializerResult.Model, deserializerResult.Nodes, typeof(Program).Assembly)
 				.AutoWireTemplateTypes()
 				.AutoWireValidationTypes()
-				.AddMetaModelType(_ => model.Entities)
-				.AddMetaModelType(_ => model.Entities.SelectMany(x => x.Attributes).ToList())
-				.AddMetaModelType(_ => model.Pages);
+				.AddMetaModelType(_ => deserializerResult.Model.Entities)
+				.AddMetaModelType(_ => deserializerResult.Model.Entities.SelectMany(x => x.Attributes).ToList())
+				.AddMetaModelType(_ => deserializerResult.Model.Pages);
 
 			// Validate the model
 			var failedValidationResults = generator.ValidateAll()

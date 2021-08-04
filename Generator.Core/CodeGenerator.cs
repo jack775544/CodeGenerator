@@ -20,13 +20,20 @@ namespace Generator.Core
 		private readonly IServiceCollection _serviceCollection;
 		private readonly List<Type> _templateTypes = new();
 		private readonly List<Type> _validationTypes = new();
+		private readonly List<IMetamodelNode> _nodes;
 
-		public CodeGenerator(TModel model, Assembly generatingAssembly)
+		public CodeGenerator(TModel model, IEnumerable<IMetamodelNode> nodes, Assembly generatingAssembly)
 		{
 			_generatingAssembly = generatingAssembly;
+			_nodes = nodes.ToList();
 			_serviceCollection = new ServiceCollection();
+			
+			// Register top level model object
 			_serviceCollection.AddSingleton(_ => model);
 			_serviceCollection.AddSingleton<BaseModel>(_ => model);
+			AddMetaModelType(_ => new []{ model });
+
+			// Add built in validators
 			AddValidatorType<IdRequiredValidationRule, IMetamodelNode>();
 			AddValidatorType<UniqueIdValidator, BaseModel>();
 		}

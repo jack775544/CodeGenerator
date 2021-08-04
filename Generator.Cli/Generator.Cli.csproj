@@ -11,6 +11,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Mono.TextTemplating" Version="2.2.1" />
     <ProjectReference Include="../Generator.Core/Generator.Core.csproj" />
+    <ProjectReference Include="../Generator.JsonModel/Generator.JsonModel.csproj" />
   </ItemGroup>
   
   <ItemGroup>
