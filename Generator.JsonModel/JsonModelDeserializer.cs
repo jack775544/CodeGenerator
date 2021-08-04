@@ -2,51 +2,78 @@
 using System.Collections.Generic;
 using Generator.Core.Metamodel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Generator.JsonModel
 {
-	public class JsonModelDeserializer
+	public static class JsonModelDeserializer
 	{
 		public static JsonModelDeserializerResult<T> Deserialize<T>(string json)
 			where T : BaseModel
 		{
 			var nodes = new List<IMetamodelNode>();
-			var model = JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings()
+			var settings = new JsonSerializerSettings
 			{
-				Converters = new List<JsonConverter>
-				{
-					new NodeConverter(nodes),
-				},
-			});
+				TypeNameHandling = TypeNameHandling.Auto,
+				PreserveReferencesHandling = PreserveReferencesHandling.All,
+				MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+				ReferenceResolverProvider = () => new IdReferenceResolver(nodes),
+			};
+			var model = JsonConvert.DeserializeObject<T>(json, settings);
 			return new JsonModelDeserializerResult<T>(model, nodes);
 		}
 	}
-
-	public class NodeConverter : JsonConverter
+	
+	public class IdReferenceResolver : IReferenceResolver
 	{
-		private readonly List<IMetamodelNode> _nodes;
+		private readonly List<IMetamodelNode> _allNodes;
+		private readonly IDictionary<Guid, IMetamodelNode> _nodes = new Dictionary<Guid, IMetamodelNode>();
 
-		public NodeConverter(List<IMetamodelNode> nodes)
+		public IdReferenceResolver(List<IMetamodelNode> allNodes)
 		{
-			_nodes = nodes;
+			_allNodes = allNodes;
 		}
 
-		public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+		public object ResolveReference(object context, string reference)
 		{
-			throw new NotImplementedException("Can currently only read");
+			Guid id = new Guid(reference);
+
+			_nodes.TryGetValue(id, out var p);
+
+			return p;
 		}
 
-		public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+		public string GetReference(object context, object value)
 		{
-			var instance = Activator.CreateInstance(objectType);
-			serializer.Populate(reader, instance);
-			_nodes.Add((IMetamodelNode)instance);
-			return instance;
+			if (value is not IMetamodelNode metamodelNode)
+			{
+				return null;
+			}
+
+			_nodes[metamodelNode.Id] = metamodelNode;
+			return metamodelNode.Id.ToString();
+
 		}
 
-		public override bool CanConvert(Type objectType)
+		public bool IsReferenced(object context, object value)
 		{
-			return objectType.IsAssignableTo(typeof(IMetamodelNode));
+			if (value is not IMetamodelNode metamodelNode)
+			{
+				return false;
+			}
+
+			return _nodes.ContainsKey(metamodelNode.Id);
+		}
+
+		public void AddReference(object context, string reference, object value)
+		{
+			if (value is IMetamodelNode metamodelNode)
+			{
+				metamodelNode.Id = Guid.Parse(reference);
+				var id = new Guid(reference);
+				_nodes[id] = metamodelNode;
+				_allNodes.Add(metamodelNode);
+			}
 		}
 	}
 }
