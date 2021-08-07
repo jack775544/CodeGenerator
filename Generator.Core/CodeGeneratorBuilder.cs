@@ -22,7 +22,6 @@ namespace Generator.Core
 		private readonly List<Type> _templateTypes = new();
 		private readonly List<Type> _validationTypes = new();
 		private readonly List<Action<ModelBuilder>> _builders = new();
-		private readonly Dictionary<Type, List<Type>> _typeMappings = new();
 
 		public CodeGeneratorBuilder(Assembly generatingAssembly)
 		{
@@ -57,7 +56,6 @@ namespace Generator.Core
 			});
 
 			var nodeType = typeof(T);
-			_typeMappings[nodeType] = GetBaseTypes(nodeType).ToList();
 
 			_serviceCollection.AddScoped<IEnumerable<T>>(sp => sp.GetRequiredService<NodeRepository>().Set<T>());
 
@@ -122,8 +120,7 @@ namespace Generator.Core
 			return new(
 				_serviceCollection.BuildServiceProvider(),
 				_templateTypes,
-				_validationTypes,
-				_typeMappings);
+				_validationTypes);
 		}
 
 		private static IEnumerable<Type> GetBaseTypes(Type type)

@@ -15,8 +15,7 @@ namespace Generator.Core
 		internal CodeGenerator(
 			IServiceProvider serviceProvider,
 			List<Type> templateTypes,
-			List<Type> validationTypes,
-			Dictionary<Type, List<Type>> typeMappings)
+			List<Type> validationTypes)
 		{
 			_serviceProvider = serviceProvider;
 			_templateTypes = templateTypes;
