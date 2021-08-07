@@ -2,12 +2,26 @@
 
 namespace Generator.Cli.Metamodel
 {
-	public class Reference : INamedNode
+	public abstract record Reference : INamedNode
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public string OppositeName { get; set; }
-		public Entity Source { get; set; }
-		public Entity Target { get; set; }
+		public Guid SourceId { get; set; }
+		public virtual Entity Source { get; set; }
+		public Guid TargetID { get; set; }
+		public virtual Entity Target { get; set; }
+	}
+
+	public record ReferenceOneToOne : Reference
+	{
+	}
+
+	public record ReferenceOneToMany : Reference
+	{
+	}
+
+	public record ReferenceManyToMany : Reference
+	{
 	}
 }

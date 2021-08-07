@@ -12,23 +12,54 @@ namespace Generator.Cli
 	{
 		public static void Main(string[] args)
 		{
-			var deserializerResult = JsonModelDeserializer.Deserialize<Model>(File.ReadAllText(args[0]));
-			if (deserializerResult.Model == null)
+			var model = JsonModelDeserializer.Deserialize<Model>(File.ReadAllText(args[0]));
+			if (model == null)
 			{
 				Console.Error.WriteLine("Invalid Model");
 				return;
 			}
 
 			// Create the generator
-			var generator = new CodeGenerator<Model>(deserializerResult.Model, deserializerResult.Nodes, typeof(Program).Assembly)
+			var generator = new CodeGeneratorBuilder<Model>(typeof(Program).Assembly)
 				.AutoWireTemplateTypes()
 				.AutoWireValidationTypes()
-				.AddMetaModelType(_ => deserializerResult.Model.Entities)
-				.AddMetaModelType(_ => deserializerResult.Model.Entities.SelectMany(x => x.Attributes).ToList())
-				.AddMetaModelType(_ => deserializerResult.Model.Pages);
+				.AddMetamodelType<Entity>()
+				.AddMetamodelType<Page>()
+				.AddMetamodelType<AttributeString>()
+				.AddMetamodelType<AttributeBoolean>()
+				.AddMetamodelType<ReferenceOneToMany>(builder =>
+				{
+					builder
+						.HasOne(e => e.Source)
+						.WithMany(e => e.OutgoingOneToManyReferences);
+					builder
+						.HasOne(e => e.Target)
+						.WithMany(e => e.IncomingOneToManyReferences);
+				})
+				.AddMetamodelType<ReferenceOneToOne>(builder =>
+				{
+					builder
+						.HasOne(e => e.Source)
+						.WithMany(e => e.OutgoingOneToOneReferences);
+					builder
+						.HasOne(e => e.Target)
+						.WithMany(e => e.IncomingOneToOneReferences);
+				})
+				.AddMetamodelType<ReferenceManyToMany>(builder =>
+				{
+					builder
+						.HasOne(e => e.Source)
+						.WithMany(e => e.OutgoingManyToManyReferences);
+					builder
+						.HasOne(e => e.Target)
+						.WithMany(e => e.IncomingManyToManyReferences);
+				})
+				.Build();
+
+			using var scope = generator.CreateGeneratorScope(model);
 
 			// Validate the model
-			var failedValidationResults = generator.ValidateAll()
+			var failedValidationResults = scope.ValidateAll()
 				.Where(x => x is FailedValidationResult)
 				.ToList();
 			if (failedValidationResults.Any())
@@ -42,7 +73,7 @@ namespace Generator.Cli
 			}
 
 			// Generate the code
-			var results = generator.GenerateAll();
+			var results = scope.GenerateAll();
 			foreach (var result in results)
 			{
 				Console.WriteLine(result);

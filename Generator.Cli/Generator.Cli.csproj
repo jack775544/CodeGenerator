@@ -12,6 +12,7 @@
     <PackageReference Include="Mono.TextTemplating" Version="2.2.1" />
     <ProjectReference Include="../Generator.Core/Generator.Core.csproj" />
     <ProjectReference Include="../Generator.JsonModel/Generator.JsonModel.csproj" />
+<!--    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.8" />-->
   </ItemGroup>
   
   <ItemGroup>

@@ -5,8 +5,8 @@ namespace Generator.Cli.Metamodel
 {
 	public class Model : BaseModel
 	{
-		public List<Entity> Entities { get; set; }
-		public List<Page> Pages { get; set; }
-		public List<Reference> References { get; set; }
+		public virtual List<Entity> Entities { get; set; }
+		public virtual List<Page> Pages { get; set; }
+		public virtual List<Reference> References { get; set; }
 	}
 }

@@ -7,7 +7,7 @@ And the attributes are:
 	foreach (var attribute in Model.Attributes)
 	{
 #>
-	Name: <#= attribute.Name #>, Type: <#= attribute.AttributeType #>
+	Name: <#= attribute.Name #>, Type: <#= attribute.GetType().Name #>
 <#
 	}
 #>

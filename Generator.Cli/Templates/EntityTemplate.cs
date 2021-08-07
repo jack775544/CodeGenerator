@@ -54,7 +54,7 @@ namespace Generator.Cli.Templates
             this.Write(", Type: ");
             
             #line 10 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(attribute.AttributeType));
+            this.Write(this.ToStringHelper.ToStringWithCulture(attribute.GetType().Name));
             
             #line default
             #line hidden

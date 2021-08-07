@@ -1,89 +1,73 @@
 ﻿{
 	"$type": "Generator.Cli.Metamodel.Model, Generator.Cli",
-	"$id": "468943c4-14ae-4fef-87aa-88dec3981f89",
-	"Entities": {
-		"$type": "System.Collections.Generic.List`1[[Generator.Cli.Metamodel.Entity, Generator.Cli]], System.Private.CoreLib",
-		"$values": [
-			{
-				"$type": "Generator.Cli.Metamodel.Entity, Generator.Cli",
-				"$id": "929a3dc6-b4a4-4c0a-b426-2323ca094244",
-				"Attributes": {
-					"$type": "System.Collections.Generic.List`1[[Generator.Cli.Metamodel.EntityAttribute, Generator.Cli]], System.Private.CoreLib",
-					"$values": [
-						{
-							"$type": "Generator.Cli.Metamodel.EntityAttribute, Generator.Cli",
-							"$id": "baaaac9e-0b2b-4fce-af56-a487dfb755b5",
-							"Name": "Name",
-							"AttributeType": "string"
-						},
-						{
-							"$type": "Generator.Cli.Metamodel.EntityAttribute, Generator.Cli",
-							"$id": "43d53918-d565-4fae-9106-c2b11a6dabad",
-							"Name": "Date of Birth",
-							"AttributeType": "DateTime"
-						}
-					]
+	"Id": "468943c4-14ae-4fef-87aa-88dec3981f89",
+	"Entities": [
+		{
+			"$type": "Generator.Cli.Metamodel.Entity, Generator.Cli",
+			"Id": "929a3dc6-b4a4-4c0a-b426-2323ca094244",
+			"Name": "Person",
+			"Attributes": [
+				{
+					"$type": "Generator.Cli.Metamodel.AttributeString, Generator.Cli",
+					"Id": "baaaac9e-0b2b-4fce-af56-a487dfb755b5",
+					"Name": "Name",
+					"AttributeType": "string",
+					"MaxLength": "12"
 				},
-				"Name": "Person"
-			},
-			{
-				"$type": "Generator.Cli.Metamodel.Entity, Generator.Cli",
-				"$id": "fad241c8-c37c-410b-8d20-332e29b91664",
-				"Attributes": {
-					"$type": "System.Collections.Generic.List`1[[Generator.Cli.Metamodel.EntityAttribute, Generator.Cli]], System.Private.CoreLib",
-					"$values": [
-						{
-							"$type": "Generator.Cli.Metamodel.EntityAttribute, Generator.Cli",
-							"$id": "4a26e44b-361c-479c-9dcf-7dbc7f6c4b49",
-							"Name": "Name",
-							"AttributeType": "string"
-						},
-						{
-							"$type": "Generator.Cli.Metamodel.EntityAttribute, Generator.Cli",
-							"$id": "1c69f8e7-84f3-4dd7-8429-2a1639b3c2ad",
-							"Name": "Address",
-							"AttributeType": "string"
-						}
-					]
-				},
-				"Name": "Shop"
-			}
-		]
-	},
-	"Pages": {
-		"$type": "System.Collections.Generic.List`1[[Generator.Cli.Metamodel.Page, Generator.Cli]], System.Private.CoreLib",
-		"$values": [
-			{
-				"$type": "Generator.Cli.Metamodel.Page, Generator.Cli",
-				"$id": "33df2005-6724-4edf-bc4a-9da5277c048f",
-				"Name": "Home"
-			},
-			{
-				"$type": "Generator.Cli.Metamodel.Page, Generator.Cli",
-				"$id": "5dabc283-fc6c-4e8c-94f8-0e0a6c8949be",
-				"Name": "About"
-			},
-			{
-				"$type": "Generator.Cli.Metamodel.Page, Generator.Cli",
-				"$id": "79a18b4a-71d2-4524-a8e0-c276f0f6f6af",
-				"Name": "Contact Us"
-			}
-		]
-	},
-	"References": {
-		"$type": "System.Collections.Generic.List`1[[Generator.Cli.Metamodel.Reference, Generator.Cli]], System.Private.CoreLib",
-		"$values": [
-			{
-				"$id": "ed51aa4c-6111-40af-95b0-acd624e9d730",
-				"Name": "Person",
-				"OppositeName": "Shops",
-				"Source": {
-					"$ref": "929a3dc6-b4a4-4c0a-b426-2323ca094244"
-				},
-				"Target": {
-					"$ref": "fad241c8-c37c-410b-8d20-332e29b91664"
+				{
+					"$type": "Generator.Cli.Metamodel.AttributeBoolean, Generator.Cli",
+					"Id": "43d53918-d565-4fae-9106-c2b11a6dabad",
+					"Name": "Date of Birth",
+					"AttributeType": "DateTime"
 				}
+			]
+		},
+		{
+			"$type": "Generator.Cli.Metamodel.Entity, Generator.Cli",
+			"Id": "fad241c8-c37c-410b-8d20-332e29b91664",
+			"Name": "Shop",
+			"Attributes": {
+				"$type": "System.Collections.Generic.List`1[[Generator.Cli.Metamodel.EntityAttribute, Generator.Cli]], System.Private.CoreLib",
+				"$values": [
+					{
+						"$type": "Generator.Cli.Metamodel.AttributeString, Generator.Cli",
+						"Id": "4a26e44b-361c-479c-9dcf-7dbc7f6c4b49",
+						"Name": "Name"
+					},
+					{
+						"$type": "Generator.Cli.Metamodel.AttributeString, Generator.Cli",
+						"Id": "1c69f8e7-84f3-4dd7-8429-2a1639b3c2ad",
+						"Name": "Address"
+					}
+				]
 			}
-		]
-	}
+		}
+	],
+	"Pages": [
+		{
+			"$type": "Generator.Cli.Metamodel.Page, Generator.Cli",
+			"Id": "33df2005-6724-4edf-bc4a-9da5277c048f",
+			"Name": "Home"
+		},
+		{
+			"$type": "Generator.Cli.Metamodel.Page, Generator.Cli",
+			"Id": "5dabc283-fc6c-4e8c-94f8-0e0a6c8949be",
+			"Name": "About"
+		},
+		{
+			"$type": "Generator.Cli.Metamodel.Page, Generator.Cli",
+			"Id": "79a18b4a-71d2-4524-a8e0-c276f0f6f6af",
+			"Name": "Contact Us"
+		}
+	],
+	"References": [
+		{
+			"$type": "Generator.Cli.Metamodel.ReferenceManyToMany, Generator.Cli",
+			"Id": "ed51aa4c-6111-40af-95b0-acd624e9d730",
+			"Name": "Shops",
+			"OppositeName": "Customers",
+			"SourceId": "929a3dc6-b4a4-4c0a-b426-2323ca094244",
+			"TargetId": "fad241c8-c37c-410b-8d20-332e29b91664"
+		}
+	]
 }
