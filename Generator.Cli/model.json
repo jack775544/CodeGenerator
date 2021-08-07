@@ -11,14 +11,12 @@
 					"$type": "Generator.Cli.Metamodel.AttributeString, Generator.Cli",
 					"Id": "baaaac9e-0b2b-4fce-af56-a487dfb755b5",
 					"Name": "Name",
-					"AttributeType": "string",
 					"MaxLength": "12"
 				},
 				{
-					"$type": "Generator.Cli.Metamodel.AttributeBoolean, Generator.Cli",
+					"$type": "Generator.Cli.Metamodel.AttributeDateTime, Generator.Cli",
 					"Id": "43d53918-d565-4fae-9106-c2b11a6dabad",
-					"Name": "Date of Birth",
-					"AttributeType": "DateTime"
+					"Name": "Date of Birth"
 				}
 			]
 		},

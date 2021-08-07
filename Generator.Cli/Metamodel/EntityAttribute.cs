@@ -16,6 +16,9 @@ namespace Generator.Cli.Metamodel
 	
 	public record AttributeBoolean : EntityAttribute
 	{
-		
+	}
+
+	public record AttributeDateTime : EntityAttribute
+	{
 	}
 }

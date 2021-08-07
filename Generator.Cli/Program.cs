@@ -28,6 +28,7 @@ namespace Generator.Cli
 				.AddMetamodelType<Page>()
 				.AddMetamodelType<AttributeString>()
 				.AddMetamodelType<AttributeBoolean>()
+				.AddMetamodelType<AttributeDateTime>()
 				.AddMetamodelType<ReferenceOneToMany>(builder =>
 				{
 					builder
