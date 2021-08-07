@@ -86,13 +86,13 @@ namespace Generator.Core
 			_templateTypes.Add(typeof(TTemplate));
 			return this;
 		}
-		
-		public CodeGeneratorBuilder<TModel> AutoWireTemplateTypes()
+
+		public CodeGeneratorBuilder<TModel> AutoWireTemplateTypes(Assembly assembly = null)
 		{
-			_templateTypes.AddRange(GenerateHelpers.GetTemplateTypes(_generatingAssembly));
+			_templateTypes.AddRange(GenerateHelpers.GetTemplateTypes(assembly ?? _generatingAssembly));
 			return this;
 		}
-		
+
 		public CodeGeneratorBuilder<TModel> AddValidatorType<TRule, TEntity>()
 			where TRule : IValidationRule<TEntity>
 			where TEntity : IMetamodelNode
@@ -101,15 +101,15 @@ namespace Generator.Core
 			return this;
 		}
 		
-		public CodeGeneratorBuilder<TModel> AutoWireValidationTypes()
+		public CodeGeneratorBuilder<TModel> AutoWireValidationTypes(Assembly assembly = null)
 		{
-			_validationTypes.AddRange(GenerateHelpers.GetValidationTypes(_generatingAssembly));
+			_validationTypes.AddRange(GenerateHelpers.GetValidationTypes(assembly ?? _generatingAssembly));
 			return this;
 		}
 
 		public CodeGenerator<TModel> Build()
 		{
-			return new CodeGenerator<TModel>(
+			return new(
 				_serviceCollection.BuildServiceProvider(),
 				_templateTypes,
 				_validationTypes,
