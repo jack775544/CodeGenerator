@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Generator.Core.Metamodel;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,16 +8,17 @@ namespace Generator.Core.Utility
 {
 	public class NodeRepository : DbContext
 	{
-		private MethodInfo _setMethod = typeof(NodeRepository)
-			.GetMethods()
-			.First(x => x.Name == "Set" && x.GetParameters().Length == 0);
-
 		private readonly List<Action<ModelBuilder>> _builders;
+		private readonly IServiceProvider _serviceProvider;
 
-		public NodeRepository(DbContextOptions<NodeRepository> options, List<Action<ModelBuilder>> builders) :
+		public NodeRepository(
+			DbContextOptions<NodeRepository> options,
+			List<Action<ModelBuilder>> builders,
+			IServiceProvider serviceProvider) :
 			base(options)
 		{
 			_builders = builders;
+			_serviceProvider = serviceProvider;
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,16 +31,15 @@ namespace Generator.Core.Utility
 
 		public IEnumerable<IMetamodelNode> GetNodes(Type type)
 		{
-			var entityTypes = Model.GetEntityTypes().ToList();
-			var validTypes = entityTypes
+			return Model
+				.GetEntityTypes()
 				.Where(entityType => type.IsAssignableFrom(entityType.ClrType))
-				.ToList();
-			return validTypes
-				.Select(entityType => (IQueryable<IMetamodelNode>) _setMethod
-					.MakeGenericMethod(entityType.ClrType)
-					.Invoke(this, Array.Empty<object>()))
-				.SelectMany(x => x)
-				.ToHashSet();
+				.Where(nodeType => !(nodeType.ClrType.IsAbstract || nodeType.ClrType.IsInterface))
+				.SelectMany(nodeType =>
+				{
+					var serviceType = typeof(IEnumerable<>).MakeGenericType(nodeType.ClrType);
+					return (IEnumerable<IMetamodelNode>) _serviceProvider.GetService(serviceType);
+				});
 		}
 	}
 }

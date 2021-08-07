@@ -59,6 +59,8 @@ namespace Generator.Core
 			var nodeType = typeof(T);
 			_typeMappings[nodeType] = GetBaseTypes(nodeType).ToList();
 
+			_serviceCollection.AddScoped<IEnumerable<T>>(sp => sp.GetRequiredService<NodeRepository>().Set<T>());
+
 			foreach (var type in GetBaseTypes(nodeType))
 			{
 				_serviceCollection.TryAdd(new ServiceDescriptor(
@@ -77,6 +79,14 @@ namespace Generator.Core
 					ServiceLifetime.Scoped));
 			}
 
+			return this;
+		}
+
+		public CodeGeneratorBuilder<TModel> AddMetamodelTypeFactory<T>(
+			Func<IServiceProvider, IEnumerable<T>> builder)
+			where T : class
+		{
+			_serviceCollection.AddScoped(builder);
 			return this;
 		}
 
@@ -118,7 +128,7 @@ namespace Generator.Core
 
 		private static IEnumerable<Type> GetBaseTypes(Type type)
 		{
-			var types = new List<Type> {type};
+			var types = new List<Type>();
 			types.AddRange(type.GetInterfaces());
 
 			var t = type;

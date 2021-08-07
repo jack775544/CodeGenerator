@@ -11,10 +11,6 @@ namespace Generator.Cli.Metamodel
 
 		public virtual ICollection<EntityAttribute> Attributes { get; set; }
 
-		// public virtual ICollection<Reference> IncomingReferences { get; set; }
-		//
-		// public virtual ICollection<Reference> OutgoingReferences { get; set; }
-		
 		public virtual ICollection<ReferenceOneToMany> IncomingOneToManyReferences { get; set; }
 
 		public virtual ICollection<ReferenceOneToMany> OutgoingOneToManyReferences { get; set; }
