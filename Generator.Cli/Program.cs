@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Generator.Cli.Metamodel;
@@ -26,36 +25,22 @@ namespace Generator.Cli
 				.AutoWireValidationTypes()
 				.AddMetamodelType<Entity>()
 				.AddMetamodelType<Page>()
+				.AddMetamodelType<EntityAttribute>()
 				.AddMetamodelType<AttributeString>()
 				.AddMetamodelType<AttributeBoolean>()
 				.AddMetamodelType<AttributeDateTime>()
-				.AddMetamodelType<ReferenceOneToMany>(builder =>
+				.AddMetamodelType<Reference>(builder =>
 				{
 					builder
 						.HasOne(e => e.Source)
-						.WithMany(e => e.OutgoingOneToManyReferences);
+						.WithMany(e => e.OutgoingReferences);
 					builder
 						.HasOne(e => e.Target)
-						.WithMany(e => e.IncomingOneToManyReferences);
+						.WithMany(e => e.IncomingReferences);
 				})
-				.AddMetamodelType<ReferenceOneToOne>(builder =>
-				{
-					builder
-						.HasOne(e => e.Source)
-						.WithMany(e => e.OutgoingOneToOneReferences);
-					builder
-						.HasOne(e => e.Target)
-						.WithMany(e => e.IncomingOneToOneReferences);
-				})
-				.AddMetamodelType<ReferenceManyToMany>(builder =>
-				{
-					builder
-						.HasOne(e => e.Source)
-						.WithMany(e => e.OutgoingManyToManyReferences);
-					builder
-						.HasOne(e => e.Target)
-						.WithMany(e => e.IncomingManyToManyReferences);
-				})
+				.AddMetamodelType<ReferenceOneToMany>()
+				.AddMetamodelType<ReferenceOneToOne>()
+				.AddMetamodelType<ReferenceManyToMany>()
 				.Build();
 
 			using var scope = generator.CreateGeneratorScope(model);

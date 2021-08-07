@@ -66,6 +66,14 @@
 			"OppositeName": "Customers",
 			"SourceId": "929a3dc6-b4a4-4c0a-b426-2323ca094244",
 			"TargetId": "fad241c8-c37c-410b-8d20-332e29b91664"
+		},
+		{
+			"$type": "Generator.Cli.Metamodel.ReferenceOneToMany, Generator.Cli",
+			"Id": "a9bc1b36-1928-4954-be60-2dfb90b11582",
+			"Name": "Other",
+			"OppositeName": "Thing",
+			"SourceId": "fad241c8-c37c-410b-8d20-332e29b91664",
+			"TargetId": "929a3dc6-b4a4-4c0a-b426-2323ca094244"
 		}
 	]
 }

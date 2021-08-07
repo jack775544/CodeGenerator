@@ -9,7 +9,7 @@ namespace Generator.Cli.Metamodel
 		public string OppositeName { get; set; }
 		public Guid SourceId { get; set; }
 		public virtual Entity Source { get; set; }
-		public Guid TargetID { get; set; }
+		public Guid TargetId { get; set; }
 		public virtual Entity Target { get; set; }
 	}
 

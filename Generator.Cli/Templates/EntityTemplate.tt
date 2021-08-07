@@ -12,6 +12,26 @@ And the attributes are:
 	}
 #>
 
+Incoming:
+<#
+	foreach (var reference in Model.IncomingReferences)
+	{
+#>
+	<#= reference.Name #> <#= reference.OppositeName #>: <#= reference.GetType() #>
+<#
+	}
+#>
+
+Outgoing:
+<#
+	foreach (var reference in Model.OutgoingReferences)
+	{
+#>
+	<#= reference.Name #> <#= reference.OppositeName #>: <#= reference.GetType() #>
+<#
+	}
+#>
+
 <#+
 	public override string OutputPath => $"Models/{Model.Name}.cs";
 
