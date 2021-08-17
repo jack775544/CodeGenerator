@@ -31,11 +31,11 @@ namespace Generator.ProtectedSample.Templates
             this.Write("<html>\r\n<head>\r\n    ");
             
             #line 7 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
- StartProtected($"Customise Title Here", CommentType.Xml); 
+            this.Write(this.ToStringHelper.ToStringWithCulture(StartProtected($"Customise Title Here", CommentType.Xml)));
             
             #line default
             #line hidden
-            this.Write("    <title>");
+            this.Write("\r\n    <title>");
             
             #line 8 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.StudentName));
@@ -45,11 +45,11 @@ namespace Generator.ProtectedSample.Templates
             this.Write("</title>\r\n    ");
             
             #line 9 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
- EndProtected(); 
+            this.Write(this.ToStringHelper.ToStringWithCulture(EndProtected()));
             
             #line default
             #line hidden
-            this.Write("</head>\r\n\r\n<body>\r\n    This is the home page for ");
+            this.Write("\r\n</head>\r\n\r\n<body>\r\n    This is the home page for ");
             
             #line 13 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.StudentName));
@@ -59,18 +59,18 @@ namespace Generator.ProtectedSample.Templates
             this.Write("\r\n    ");
             
             #line 14 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
- StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml); 
+            this.Write(this.ToStringHelper.ToStringWithCulture(StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml)));
             
             #line default
             #line hidden
-            this.Write("    ");
+            this.Write("\r\n    ");
             
             #line 15 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
- EndProtected(); 
+            this.Write(this.ToStringHelper.ToStringWithCulture(EndProtected()));
             
             #line default
             #line hidden
-            this.Write("</body>\r\n</html>\r\n");
+            this.Write("\r\n</body>\r\n</html>\r\n");
             return this.GenerationEnvironment.ToString();
         }
         

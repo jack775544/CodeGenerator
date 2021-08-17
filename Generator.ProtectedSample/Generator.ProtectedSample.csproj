@@ -10,15 +10,15 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Update="Templates\HomePage.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HomePage.tt</DependentUpon>
-    </Compile>
     <Compile Update="Templates\StudentPage.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StudentPage.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\HomePage.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomePage.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   

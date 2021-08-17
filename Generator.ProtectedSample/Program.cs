@@ -46,9 +46,8 @@ namespace Generator.ProtectedSample
 			{
 				return File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Output", template.OutputPath));
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine(e);
 				return null;
 			}
 		}

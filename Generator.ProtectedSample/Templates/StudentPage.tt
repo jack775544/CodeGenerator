@@ -4,15 +4,15 @@
 <#@ import namespace="Generator.ProtectedSample.Metamodel" #>
 <html>
 <head>
-    <# StartProtected($"Customise Title Here", CommentType.Xml); #>
+    <#= StartProtected($"Customise Title Here", CommentType.Xml) #>
     <title><#= Model.StudentName #></title>
-    <# EndProtected(); #>
+    <#= EndProtected() #>
 </head>
 
 <body>
     This is the home page for <#= Model.StudentName #>
-    <# StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml); #>
-    <# EndProtected(); #>
+    <#= StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml) #>
+    <#= EndProtected() #>
 </body>
 </html>
 <#+

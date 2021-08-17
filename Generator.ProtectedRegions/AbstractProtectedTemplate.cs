@@ -10,7 +10,7 @@ namespace Generator.ProtectedRegions
 
 		private ProtectedRegion _currentRegion;
 
-		public void StartProtected(string name, string startComment, string endComment, bool enabled = false)
+		public string StartProtected(string name, string startComment, string endComment, bool enabled = false)
 		{
 			if (_currentRegion != null)
 			{
@@ -18,24 +18,26 @@ namespace Generator.ProtectedRegions
 					$"File: {OutputPath}\n" +
 					$"Existing Region Name: {_currentRegion.Name}\n" +
 					$"Current Region Name: {name}");
-				return;
+				return "";
 			}
 
 			_currentRegion = new ProtectedRegion(startComment, endComment, name, enabled);
 			ProtectedRegions.Add(_currentRegion);
-			WriteLine(_currentRegion.StartAsString());
+			return _currentRegion.StartAsString();
+			// WriteLine(_currentRegion.StartAsString());
 		}
 
-		public void StartProtected(string name, CommentType type, bool enabled = false)
+		public string StartProtected(string name, CommentType type, bool enabled = false)
 		{
 			var (start, end) = GetCommentMarkers(type);
-			StartProtected(name, start, end, enabled);
+			return StartProtected(name, start, end, enabled);
 		}
 
-		public void EndProtected()
+		public string EndProtected()
 		{
-			WriteLine(_currentRegion.EndAsString());
+			var end = _currentRegion.EndAsString();
 			_currentRegion = null;
+			return end;
 		}
 
 		public IEnumerable<(ProtectedRegion, string)> GetActiveRegions(string contents)
@@ -69,9 +71,9 @@ namespace Generator.ProtectedRegions
 		{
 			return commentType switch
 			{
-				CommentType.DoubleSlash => ("//", ""),
-				CommentType.SlashStar => ("/*", "*/"),
-				CommentType.Xml => ("<!--", "-->"),
+				CommentType.DoubleSlash => ("// ", ""),
+				CommentType.SlashStar => ("/* ", " */"),
+				CommentType.Xml => ("<!-- ", " -->"),
 				_ => throw new ArgumentOutOfRangeException(nameof(commentType), commentType, null)
 			};
 		}

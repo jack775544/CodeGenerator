@@ -31,18 +31,18 @@ namespace Generator.ProtectedSample.Templates
             this.Write("<html>\r\n<head>\r\n    ");
             
             #line 7 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
- StartProtected($"Customise Title Here", CommentType.Xml); 
+            this.Write(this.ToStringHelper.ToStringWithCulture(StartProtected($"Customise Title Here", CommentType.Xml)));
             
             #line default
             #line hidden
-            this.Write("    <title>Student Home</title>\r\n    ");
+            this.Write("\r\n    <title>Student Home</title>\r\n    ");
             
             #line 9 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
- EndProtected(); 
+            this.Write(this.ToStringHelper.ToStringWithCulture(EndProtected()));
             
             #line default
             #line hidden
-            this.Write("</head>\r\n\r\n<body>\r\n    This is the home pages for all students\r\n    <ol>\r\n");
+            this.Write("\r\n</head>\r\n\r\n<body>\r\n    This is the home pages for all students\r\n    <ol>\r\n");
             
             #line 15 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
 
@@ -78,22 +78,36 @@ namespace Generator.ProtectedSample.Templates
             this.Write("        ");
             
             #line 23 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
- StartProtected($"Add any other student pages here", CommentType.Xml); 
+            this.Write(this.ToStringHelper.ToStringWithCulture(StartProtected($"Add any other student pages here", CommentType.Xml)));
             
             #line default
             #line hidden
-            this.Write("        ");
+            this.Write("\r\n        ");
             
             #line 24 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
- EndProtected(); 
+            this.Write(this.ToStringHelper.ToStringWithCulture(EndProtected()));
             
             #line default
             #line hidden
-            this.Write("    </ol>\r\n</body>\r\n</html>\r\n");
+            this.Write("\r\n    </ol>\r\n\r\n    <script>\r\n        console.log('Hello World');\r\n        ");
+            
+            #line 29 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StartProtected("Add any custom javascript here", CommentType.DoubleSlash)));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n        ");
+            
+            #line 30 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(EndProtected()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n    </script>\r\n</body>\r\n</html>\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 28 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
+        #line 34 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\HomePage.tt"
 
 	private readonly IEnumerable<Page> _pages;
 

@@ -21,12 +21,12 @@ namespace Generator.ProtectedRegions
 
 		public string StartAsString()
 		{
-			return $"{StartComment} {Name} {EnabledString} begin {EndComment}";
+			return $"{StartComment}{Name} {EnabledString} begin{EndComment}";
 		}
 
 		public string EndAsString()
 		{
-			return $"{StartComment} {Name} end {EndComment}";
+			return $"{StartComment}{Name} end{EndComment}";
 		}
 
 		internal Regex MakeStartRegex(bool enabled = true)
@@ -35,7 +35,7 @@ namespace Generator.ProtectedRegions
 			var end = Regex.Escape(EndComment);
 			var name = Regex.Escape(Name);
 			var enabledString = enabled ? "on" : "off";
-			return new Regex($"{start} {name} {enabledString} begin {end}");
+			return new Regex($"{start}{name} {enabledString} begin{end}");
 		}
 
 		internal Regex MakeEndRegex()
@@ -43,7 +43,7 @@ namespace Generator.ProtectedRegions
 			var start = Regex.Escape(StartComment);
 			var end = Regex.Escape(EndComment);
 			var name = Regex.Escape(Name);
-			return new Regex($"{start} {name} end {end}");
+			return new Regex($"{start}{name} end{end}");
 		}
 
 		public ProtectedRegion Clone()

@@ -4,9 +4,9 @@
 <#@ import namespace="Generator.ProtectedSample.Metamodel" #>
 <html>
 <head>
-    <# StartProtected($"Customise Title Here", CommentType.Xml); #>
+    <#= StartProtected($"Customise Title Here", CommentType.Xml) #>
     <title>Student Home</title>
-    <# EndProtected(); #>
+    <#= EndProtected() #>
 </head>
 
 <body>
@@ -20,9 +20,15 @@
 <#
        }
 #>
-        <# StartProtected($"Add any other student pages here", CommentType.Xml); #>
-        <# EndProtected(); #>
+        <#= StartProtected($"Add any other student pages here", CommentType.Xml) #>
+        <#= EndProtected() #>
     </ol>
+
+    <script>
+        console.log('Hello World');
+        <#= StartProtected("Add any custom javascript here", CommentType.DoubleSlash) #>
+        <#= EndProtected() #>
+    </script>
 </body>
 </html>
 <#+

@@ -34,7 +34,6 @@ namespace Generator.ProtectedRegions
 				var (idx, length) = ProtectedRegionHelpers.FindProtectedRegionContentIndex(templateOutputString, region);
 				templateOutput.Remove(idx, length);
 				templateOutput.Insert(idx, region.StartAsString() + contents + region.EndAsString());
-				Console.WriteLine($"Region {region.Name} has contents\n{contents}");
 			}
 		}
 	}
