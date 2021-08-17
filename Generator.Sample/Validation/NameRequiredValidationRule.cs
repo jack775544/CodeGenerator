@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Generator.Cli.Metamodel;
 using Generator.Core.Validation;
+using Generator.Sample.Metamodel;
 
-namespace Generator.Cli.Validation
+namespace Generator.Sample.Validation
 {
 	public class NameRequiredValidationRule : AbstractValidationRule<INamedNode>
 	{

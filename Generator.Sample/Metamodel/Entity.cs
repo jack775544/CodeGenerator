@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Generator.Cli.Metamodel
+namespace Generator.Sample.Metamodel
 {
 	public record Entity : INamedNode
 	{

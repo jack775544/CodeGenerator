@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Generator.Cli.Metamodel;
 using Generator.Core.Templates;
+using Generator.Sample.Metamodel;
 
-namespace Generator.Cli
+namespace Generator.Sample
 {
 	public abstract class EntityTemplateBase : AbstractTemplate<Entity>
 	{

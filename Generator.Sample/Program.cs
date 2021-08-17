@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Generator.Cli.Metamodel;
 using Generator.Core;
 using Generator.Core.Validation;
 using Generator.JsonModel;
+using Generator.Sample.Metamodel;
 
-namespace Generator.Cli
+namespace Generator.Sample
 {
 	public class Program
 	{

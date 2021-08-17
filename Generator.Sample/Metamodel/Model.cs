@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Generator.Core.Metamodel;
 
-namespace Generator.Cli.Metamodel
+namespace Generator.Sample.Metamodel
 {
 	public class Model : BaseModel
 	{

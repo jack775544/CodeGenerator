@@ -7,10 +7,10 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Generator.Cli.Templates
+namespace Generator.Sample.Templates
 {
     using System.Collections.Generic;
-    using Generator.Cli.Metamodel;
+    using Sample.Metamodel;
     using Generator.Core.Templates;
     using System;
     
@@ -18,7 +18,7 @@ namespace Generator.Cli.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\PageTemplate.tt"
+    #line 1 "C:\Users\Jack\repo\CodeGenerator\Generator.Sample\Templates\PageTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class PageTemplate : AbstractTemplate<Page>
     {
@@ -30,7 +30,7 @@ namespace Generator.Cli.Templates
         {
             this.Write("This page is called ");
             
-            #line 5 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\PageTemplate.tt"
+            #line 5 "C:\Users\Jack\repo\CodeGenerator\Generator.Sample\Templates\PageTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -39,7 +39,7 @@ namespace Generator.Cli.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 6 "C:\Users\Jack\repo\CodeGenerator\Generator.Cli\Templates\PageTemplate.tt"
+        #line 6 "C:\Users\Jack\repo\CodeGenerator\Generator.Sample\Templates\PageTemplate.tt"
 
 	private readonly IEnumerable<Page> _pages;
 

@@ -1,6 +1,6 @@
 ﻿using Generator.Core.Metamodel;
 
-namespace Generator.Cli.Metamodel
+namespace Generator.Sample.Metamodel
 {
 	public interface INamedNode : IMetamodelNode
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Generator.Cli.Metamodel
+namespace Generator.Sample.Metamodel
 {
 	public record Page : INamedNode
 	{
