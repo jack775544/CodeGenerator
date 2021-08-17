@@ -10,8 +10,6 @@ namespace Generator.Core.Templates
 		string TransformText();
 		void ResetGenerationEnvironment();
 		StringBuilder GetGenerationEnvironment();
-		void Write(string textToAppend);
-		void WriteLine(string textToAppend);
 		void AddError(string error);
 		IEnumerable<string> GetErrors();
 	}
