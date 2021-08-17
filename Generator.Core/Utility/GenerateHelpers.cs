@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Generator.Core.Hooks;
 using Generator.Core.Metamodel;
 using Generator.Core.Templates;
 using Generator.Core.Validation;
@@ -17,14 +18,22 @@ namespace Generator.Core.Utility
 		private static MethodInfo _validateMethod = typeof(GenerateHelpers)
 			.GetMethod("Validate", BindingFlags.Static | BindingFlags.Public)!;
 
-		public static IEnumerable<GenerationResult> Generate<T>(ITemplate<T> template)
+		public static IEnumerable<GenerationResult> Generate<T>(ITemplate<T> template, IEnumerable<IGenerateHook> hooks)
 		{
+			var generateHooks = hooks.ToList();
 			foreach (var entity in template.MapObjects())
 			{
 				if (template.Guard())
 				{
 					template.Model = entity;
-					yield return new GenerationResult(template.OutputPath, template.TransformText());
+					var _ = template.TransformText();
+					foreach (var hook in generateHooks)
+					{
+						hook.Intercept(template);
+					}
+					yield return new GenerationResult(
+						template.OutputPath,
+						template.GetGenerationEnvironment().ToString());
 					template.ResetGenerationEnvironment();
 				}
 			}
@@ -57,7 +66,10 @@ namespace Generator.Core.Utility
 					.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IValidationRule<>)));
 		}
 
-		public static IEnumerable<GenerationResult> InvokeTemplate(IServiceProvider serviceProvider, Type type)
+		public static IEnumerable<GenerationResult> InvokeTemplate(
+			IServiceProvider serviceProvider,
+			Type type,
+			IEnumerable<IGenerateHook> hooks)
 		{
 			var template = ActivatorUtilities.CreateInstance(serviceProvider, type);
 			var genericArg = type
@@ -66,7 +78,7 @@ namespace Generator.Core.Utility
 				.GetGenericArguments()
 				.First();
 			var methodInfo = _generateMethod.MakeGenericMethod(genericArg);
-			return (IEnumerable<GenerationResult>) methodInfo.Invoke(null, new[] {template});
+			return (IEnumerable<GenerationResult>) methodInfo.Invoke(null, new[] {template, hooks});
 		}
 
 		public static IEnumerable<ValidationResult> InvokeValidation(IServiceProvider serviceProvider, Type type)

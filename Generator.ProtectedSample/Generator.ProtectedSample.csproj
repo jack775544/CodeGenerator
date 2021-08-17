@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="../Generator.ProtectedRegions/Generator.ProtectedRegions.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Templates\HomePage.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomePage.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\StudentPage.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentPage.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Templates\HomePage.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>HomePage.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\StudentPage.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>StudentPage.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

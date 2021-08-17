@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Generator.Core.Hooks;
 using Generator.Core.Metamodel;
 using Generator.Core.Templates;
 using Generator.Core.Utility;
@@ -22,6 +23,7 @@ namespace Generator.Core
 		private readonly List<Type> _templateTypes = new();
 		private readonly List<Type> _validationTypes = new();
 		private readonly List<Action<ModelBuilder>> _builders = new();
+		private readonly List<IGenerateHook> _hooks = new();
 
 		public CodeGeneratorBuilder(Assembly generatingAssembly)
 		{
@@ -115,12 +117,19 @@ namespace Generator.Core
 			return this;
 		}
 
+		public CodeGeneratorBuilder<TModel> AddGenerationHook(IGenerateHook hook)
+		{
+			_hooks.Add(hook);
+			return this;
+		}
+
 		public CodeGenerator<TModel> Build()
 		{
 			return new(
 				_serviceCollection.BuildServiceProvider(),
 				_templateTypes,
-				_validationTypes);
+				_validationTypes,
+				_hooks);
 		}
 
 		private static IEnumerable<Type> GetBaseTypes(Type type)

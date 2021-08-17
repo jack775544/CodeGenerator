@@ -1,0 +1,31 @@
+﻿<#@ template language="C#" inherits="AbstractProtectedTemplate<Page>" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Generator.ProtectedRegions" #>
+<#@ import namespace="Generator.ProtectedSample.Metamodel" #>
+<html>
+<head>
+    <# StartProtected($"Customise Title Here", CommentType.Xml); #>
+    <title><#= Model.StudentName #></title>
+    <# EndProtected(); #>
+</head>
+
+<body>
+    This is the home page for <#= Model.StudentName #>
+    <# StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml); #>
+    <# EndProtected(); #>
+</body>
+</html>
+<#+
+	private readonly IEnumerable<Page> _pages;
+
+	public StudentPage(IEnumerable<Page> pages)
+	{
+		_pages = pages;
+	}
+
+	public override string OutputPath => $"{Model.StudentName}.html";
+	public override IEnumerable<Page> MapObjects()
+	{
+		return _pages;
+	}
+#>
