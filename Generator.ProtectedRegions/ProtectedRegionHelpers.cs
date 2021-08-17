@@ -10,7 +10,7 @@ namespace Generator.ProtectedRegions
 			if (!startMatch.Success)
 			{
 				throw new InvalidOperationException("Unable to find protected region");
-			}s
+			}
 
 			var endMatch = region.MakeEndRegex().Match(contents);
 			if (!startMatch.Success)
