@@ -23,17 +23,18 @@ namespace Generator.Core.Utility
 			var generateHooks = hooks.ToList();
 			foreach (var entity in template.MapObjects())
 			{
+				template.Model = entity;
 				if (template.Guard())
 				{
-					template.Model = entity;
-					var _ = template.TransformText();
+					template.TransformText();
 					foreach (var hook in generateHooks)
 					{
-						hook.Intercept(template);
+						hook.AfterGenerate(template);
 					}
 					yield return new GenerationResult(
 						template.OutputPath,
-						template.GetGenerationEnvironment().ToString());
+						template.GetGenerationEnvironment().ToString(),
+						template.GetErrors());
 					template.ResetGenerationEnvironment();
 				}
 			}

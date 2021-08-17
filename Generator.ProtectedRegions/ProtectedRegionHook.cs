@@ -13,7 +13,7 @@ namespace Generator.ProtectedRegions
 			_getExistingContents = getExistingContents;
 		}
 		
-		public void Intercept(ITextTemplate template)
+		public void AfterGenerate(ITextTemplate template)
 		{
 			if (template is not IProtectedTemplate protectedTemplate)
 			{

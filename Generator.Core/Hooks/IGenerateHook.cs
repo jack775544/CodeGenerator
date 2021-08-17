@@ -4,6 +4,6 @@ namespace Generator.Core.Hooks
 {
 	public interface IGenerateHook
 	{
-		void Intercept(ITextTemplate template);
+		void AfterGenerate(ITextTemplate template);
 	}
 }

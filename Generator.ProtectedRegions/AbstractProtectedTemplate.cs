@@ -24,7 +24,6 @@ namespace Generator.ProtectedRegions
 			_currentRegion = new ProtectedRegion(startComment, endComment, name, enabled);
 			ProtectedRegions.Add(_currentRegion);
 			return _currentRegion.StartAsString();
-			// WriteLine(_currentRegion.StartAsString());
 		}
 
 		public string StartProtected(string name, CommentType type, bool enabled = false)
