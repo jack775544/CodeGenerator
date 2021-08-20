@@ -1,18 +1,19 @@
-﻿<#@ template language="C#" inherits="AbstractProtectedTemplate<Page>" #>
+﻿<#@ template language="C#" inherits="AbstractTemplate<Page>" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Generator.ProtectedRegions" #>
 <#@ import namespace="Generator.ProtectedSample.Metamodel" #>
+<#@ import namespace="Generator.Core.Templates" #>
 <html>
 <head>
-    <#= StartProtected($"Customise Title Here", CommentType.Xml) #>
+    <#= this.StartProtected($"Customise Title Here", CommentType.Xml) #>
     <title><#= Model.StudentName #></title>
-    <#= EndProtected() #>
+    <#= this.EndProtected() #>
 </head>
 
 <body>
     This is the home page for <#= Model.StudentName #>
-    <#= StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml) #>
-    <#= EndProtected() #>
+    <#= this.StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml) #>
+    <#= this.EndProtected() #>
 </body>
 </html>
 <#+

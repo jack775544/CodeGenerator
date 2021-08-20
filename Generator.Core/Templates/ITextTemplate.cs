@@ -12,5 +12,6 @@ namespace Generator.Core.Templates
 		StringBuilder GetGenerationEnvironment();
 		void AddError(string error);
 		IEnumerable<string> GetErrors();
+		IDictionary<string, object> Metadata { get; }
 	}
 }

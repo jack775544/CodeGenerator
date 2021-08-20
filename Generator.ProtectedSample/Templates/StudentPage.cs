@@ -12,6 +12,7 @@ namespace Generator.ProtectedSample.Templates
     using System.Collections.Generic;
     using Generator.ProtectedRegions;
     using Generator.ProtectedSample.Metamodel;
+    using Generator.Core.Templates;
     using System;
     
     /// <summary>
@@ -20,7 +21,7 @@ namespace Generator.ProtectedSample.Templates
     
     #line 1 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class StudentPage : AbstractProtectedTemplate<Page>
+    public partial class StudentPage : AbstractTemplate<Page>
     {
 #line hidden
         /// <summary>
@@ -30,43 +31,43 @@ namespace Generator.ProtectedSample.Templates
         {
             this.Write("<html>\r\n<head>\r\n    ");
             
-            #line 7 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(StartProtected($"Customise Title Here", CommentType.Xml)));
+            #line 8 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.StartProtected($"Customise Title Here", CommentType.Xml)));
             
             #line default
             #line hidden
             this.Write("\r\n    <title>");
             
-            #line 8 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            #line 9 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.StudentName));
             
             #line default
             #line hidden
             this.Write("</title>\r\n    ");
             
-            #line 9 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(EndProtected()));
+            #line 10 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.EndProtected()));
             
             #line default
             #line hidden
             this.Write("\r\n</head>\r\n\r\n<body>\r\n    This is the home page for ");
             
-            #line 13 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            #line 14 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.StudentName));
             
             #line default
             #line hidden
             this.Write("\r\n    ");
             
-            #line 14 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml)));
+            #line 15 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml)));
             
             #line default
             #line hidden
             this.Write("\r\n    ");
             
-            #line 15 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(EndProtected()));
+            #line 16 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.EndProtected()));
             
             #line default
             #line hidden
@@ -74,7 +75,7 @@ namespace Generator.ProtectedSample.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 18 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+        #line 19 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
 
 	private readonly IEnumerable<Page> _pages;
 

@@ -1,12 +1,13 @@
-﻿<#@ template language="C#" inherits="AbstractProtectedTemplate<object>" #>
+﻿<#@ template language="C#" inherits="AbstractTemplate<object>" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Generator.ProtectedRegions" #>
 <#@ import namespace="Generator.ProtectedSample.Metamodel" #>
+<#@ import namespace="Generator.Core.Templates" #>
 <html>
 <head>
-    <#= StartProtected($"Customise Title Here", CommentType.Xml) #>
+    <#= this.StartProtected($"Customise Title Here", CommentType.Xml) #>
     <title>Student Home</title>
-    <#= EndProtected() #>
+    <#= this.EndProtected() #>
 </head>
 
 <body>
@@ -20,14 +21,14 @@
 <#
        }
 #>
-        <#= StartProtected($"Add any other student pages here", CommentType.Xml) #>
-        <#= EndProtected() #>
+        <#= this.StartProtected($"Add any other student pages here", CommentType.Xml) #>
+        <#= this.EndProtected() #>
     </ol>
 
     <script>
         console.log('Hello World');
-        <#= StartProtected("Add any custom javascript here", CommentType.DoubleSlash) #>
-        <#= EndProtected() #>
+        <#= this.StartProtected("Add any custom javascript here", CommentType.DoubleSlash) #>
+        <#= this.EndProtected() #>
     </script>
 </body>
 </html>

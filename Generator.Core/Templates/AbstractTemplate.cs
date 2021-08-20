@@ -8,9 +8,11 @@ namespace Generator.Core.Templates
 
 		public T Model { get; set; }
 
+		public IDictionary<string, object> Metadata { get; } = new Dictionary<string, object>();
+
 		public abstract IEnumerable<T> MapObjects();
 
-		public bool Guard()
+		public virtual bool Guard()
 		{
 			return true;
 		}

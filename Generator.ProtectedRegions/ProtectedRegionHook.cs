@@ -15,11 +15,6 @@ namespace Generator.ProtectedRegions
 		
 		public void AfterGenerate(ITextTemplate template)
 		{
-			if (template is not IProtectedTemplate protectedTemplate)
-			{
-				return;
-			}
-
 			var existingContents = _getExistingContents(template);
 			if (existingContents == null)
 			{
@@ -27,7 +22,7 @@ namespace Generator.ProtectedRegions
 			}
 
 			var templateOutput = template.GetGenerationEnvironment();
-			var regions = protectedTemplate.GetActiveRegions(existingContents);
+			var regions = template.GetActiveRegions(existingContents);
 			foreach (var (region, contents) in regions)
 			{
 				var templateOutputString = templateOutput.ToString();
