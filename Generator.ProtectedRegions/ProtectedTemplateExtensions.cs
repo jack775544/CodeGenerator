@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Generator.Comments;
 using Generator.Core.Templates;
 
 namespace Generator.ProtectedRegions
 {
-	public static class TemplateExtensions
+	public static class ProtectedTemplateExtensions
 	{
 		#region PublicMethods
 
@@ -37,7 +38,7 @@ namespace Generator.ProtectedRegions
 			CommentType type,
 			bool enabled = false)
 		{
-			var (start, end) = GetCommentMarkers(type);
+			var (start, end) = CommentStringMethods.GetSingleLineCommentMarkers(type);
 			return self.StartProtected(name, start, end, enabled);
 		}
 
@@ -126,16 +127,5 @@ namespace Generator.ProtectedRegions
 		}
 
 		#endregion
-
-		private static (string, string) GetCommentMarkers(CommentType commentType)
-		{
-			return commentType switch
-			{
-				CommentType.DoubleSlash => ("// ", ""),
-				CommentType.SlashStar => ("/* ", " */"),
-				CommentType.Xml => ("<!-- ", " -->"),
-				_ => throw new ArgumentOutOfRangeException(nameof(commentType), commentType, null)
-			};
-		}
 	}
 }

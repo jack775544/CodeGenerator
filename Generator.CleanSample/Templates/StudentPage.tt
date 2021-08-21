@@ -1,20 +1,17 @@
 ﻿<#@ template language="C#" inherits="AbstractTemplate<Page>" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="Generator.ProtectedRegions" #>
-<#@ import namespace="Generator.ProtectedSample.Metamodel" #>
 <#@ import namespace="Generator.Core.Templates" #>
+<#@ import namespace="Generator.CleanSample.Metamodel" #>
+<#@ import namespace="Generator.Clean" #>
 <#@ import namespace="Generator.Comments" #>
+<#= this.AddCleanHeader(CommentType.Xml) #>
 <html>
 <head>
-    <#= this.StartProtected($"Customise Title Here", CommentType.Xml) #>
     <title><#= Model.StudentName #></title>
-    <#= this.EndProtected() #>
 </head>
 
 <body>
     This is the home page for <#= Model.StudentName #>
-    <#= this.StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml) #>
-    <#= this.EndProtected() #>
 </body>
 </html>
 <#+

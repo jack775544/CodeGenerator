@@ -13,13 +13,17 @@ namespace Generator.Core.Utility
 	internal static class GenerateHelpers
 	{
 		private static MethodInfo _generateMethod = typeof(GenerateHelpers)
-			.GetMethod("Generate", BindingFlags.Static | BindingFlags.Public)!;
+			.GetMethod("Generate", BindingFlags.Static | BindingFlags.NonPublic)!;
 
 		private static MethodInfo _validateMethod = typeof(GenerateHelpers)
-			.GetMethod("Validate", BindingFlags.Static | BindingFlags.Public)!;
+			.GetMethod("Validate", BindingFlags.Static | BindingFlags.NonPublic)!;
 
-		public static IEnumerable<GenerationResult> Generate<T>(ITemplate<T> template, IEnumerable<IGenerateHook> hooks)
+		internal static IEnumerable<GenerationResult> Generate<T>(
+			ITemplate<T> template,
+			IEnumerable<IGenerateHook> hooks,
+			IServiceProvider serviceProvider)
 		{
+			template.ServiceProvider = serviceProvider;
 			var generateHooks = hooks.ToList();
 			foreach (var entity in template.MapObjects())
 			{
@@ -40,7 +44,7 @@ namespace Generator.Core.Utility
 			}
 		}
 
-		public static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule) where T : IMetamodelNode
+		internal static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule) where T : IMetamodelNode
 		{
 			foreach (var entity in rule.MapObjects())
 			{
@@ -49,7 +53,7 @@ namespace Generator.Core.Utility
 			}
 		}
 
-		public static IEnumerable<Type> GetTemplateTypes(Assembly generatingAssembly)
+		internal static IEnumerable<Type> GetTemplateTypes(Assembly generatingAssembly)
 		{
 			return generatingAssembly
 				.GetTypes()
@@ -58,7 +62,7 @@ namespace Generator.Core.Utility
 					.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ITemplate<>)));
 		}
 		
-		public static IEnumerable<Type> GetValidationTypes(Assembly generatingAssembly)
+		internal static IEnumerable<Type> GetValidationTypes(Assembly generatingAssembly)
 		{
 			return generatingAssembly
 				.GetTypes()
@@ -67,7 +71,7 @@ namespace Generator.Core.Utility
 					.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IValidationRule<>)));
 		}
 
-		public static IEnumerable<GenerationResult> InvokeTemplate(
+		internal static IEnumerable<GenerationResult> InvokeTemplate(
 			IServiceProvider serviceProvider,
 			Type type,
 			IEnumerable<IGenerateHook> hooks)
@@ -79,10 +83,10 @@ namespace Generator.Core.Utility
 				.GetGenericArguments()
 				.First();
 			var methodInfo = _generateMethod.MakeGenericMethod(genericArg);
-			return (IEnumerable<GenerationResult>) methodInfo.Invoke(null, new[] {template, hooks});
+			return (IEnumerable<GenerationResult>) methodInfo.Invoke(null, new[] {template, hooks, serviceProvider});
 		}
 
-		public static IEnumerable<ValidationResult> InvokeValidation(IServiceProvider serviceProvider, Type type)
+		internal static IEnumerable<ValidationResult> InvokeValidation(IServiceProvider serviceProvider, Type type)
 		{
 			var rule = ActivatorUtilities.CreateInstance(serviceProvider, type);
 			var genericArg = type

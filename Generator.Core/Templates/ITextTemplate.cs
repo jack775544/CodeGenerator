@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Generator.Core.Templates
@@ -13,5 +14,6 @@ namespace Generator.Core.Templates
 		void AddError(string error);
 		IEnumerable<string> GetErrors();
 		IDictionary<string, object> Metadata { get; }
+		IServiceProvider ServiceProvider { get; set; }
 	}
 }

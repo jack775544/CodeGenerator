@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Generator.Core.Templates
 {
@@ -9,6 +10,8 @@ namespace Generator.Core.Templates
 		public T Model { get; set; }
 
 		public IDictionary<string, object> Metadata { get; } = new Dictionary<string, object>();
+
+		public IServiceProvider ServiceProvider { get; set; }
 
 		public abstract IEnumerable<T> MapObjects();
 

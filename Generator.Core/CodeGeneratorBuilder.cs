@@ -123,6 +123,24 @@ namespace Generator.Core
 			return this;
 		}
 
+		public CodeGeneratorBuilder<TModel> AddSingletonHelper<T>() where T : class
+		{
+			_serviceCollection.AddSingleton<T>();
+			return this;
+		}
+
+		public CodeGeneratorBuilder<TModel> AddScopedHelper<T>() where T : class
+		{
+			_serviceCollection.AddScoped<T>();
+			return this;
+		}
+
+		public CodeGeneratorBuilder<TModel> ConfigureOptions<T>(Action<T> configureAction) where T : class
+		{
+			_serviceCollection.Configure(configureAction);
+			return this;
+		}
+
 		public CodeGenerator<TModel> Build()
 		{
 			return new(

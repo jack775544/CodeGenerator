@@ -1,4 +1,4 @@
-﻿namespace Generator.ProtectedRegions
+﻿namespace Generator.Comments
 {
 	public enum CommentType
 	{

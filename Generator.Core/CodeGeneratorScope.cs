@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Generator.Core
 {
-	public class CodeGeneratorScope<T> : IServiceScope
+	public class CodeGeneratorScope<T> : IServiceScope, IServiceProvider
 	{
 		private readonly IServiceScope _scope;
 		private readonly List<Type> _templateTypes;
@@ -43,12 +43,17 @@ namespace Generator.Core
 		
 		public IEnumerable<GenerationResult> Generate<TModel>(ITemplate<TModel> template)
 		{
-			return GenerateHelpers.Generate(template, _hooks);
+			return GenerateHelpers.Generate(template, _hooks, _scope.ServiceProvider);
 		}
 
 		public IEnumerable<ValidationResult> Validate<TModel>(IValidationRule<TModel> rule) where TModel : IMetamodelNode
 		{
 			return GenerateHelpers.Validate(rule);
+		}
+
+		public object GetService(Type serviceType)
+		{
+			return ServiceProvider.GetService(serviceType);
 		}
 
 		public void Dispose()

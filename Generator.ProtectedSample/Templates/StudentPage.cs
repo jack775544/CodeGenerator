@@ -13,6 +13,7 @@ namespace Generator.ProtectedSample.Templates
     using Generator.ProtectedRegions;
     using Generator.ProtectedSample.Metamodel;
     using Generator.Core.Templates;
+    using Generator.Comments;
     using System;
     
     /// <summary>
@@ -31,42 +32,42 @@ namespace Generator.ProtectedSample.Templates
         {
             this.Write("<html>\r\n<head>\r\n    ");
             
-            #line 8 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            #line 9 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.StartProtected($"Customise Title Here", CommentType.Xml)));
             
             #line default
             #line hidden
             this.Write("\r\n    <title>");
             
-            #line 9 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            #line 10 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.StudentName));
             
             #line default
             #line hidden
             this.Write("</title>\r\n    ");
             
-            #line 10 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            #line 11 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.EndProtected()));
             
             #line default
             #line hidden
             this.Write("\r\n</head>\r\n\r\n<body>\r\n    This is the home page for ");
             
-            #line 14 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            #line 15 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.StudentName));
             
             #line default
             #line hidden
             this.Write("\r\n    ");
             
-            #line 15 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            #line 16 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.StartProtected($"Write content for {Model.StudentName} here", CommentType.Xml)));
             
             #line default
             #line hidden
             this.Write("\r\n    ");
             
-            #line 16 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+            #line 17 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.EndProtected()));
             
             #line default
@@ -75,7 +76,7 @@ namespace Generator.ProtectedSample.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 19 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
+        #line 20 "C:\Users\Jack\repo\CodeGenerator\Generator.ProtectedSample\Templates\StudentPage.tt"
 
 	private readonly IEnumerable<Page> _pages;
 
