@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Generator.Core.Hooks;
-using Generator.Core.Metamodel;
 using Generator.Core.Templates;
 using Generator.Core.Validation;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,7 +43,7 @@ namespace Generator.Core.Utility
 			}
 		}
 
-		internal static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule) where T : IMetamodelNode
+		internal static IEnumerable<ValidationResult> Validate<T>(IValidationRule<T> rule)
 		{
 			foreach (var entity in rule.MapObjects())
 			{

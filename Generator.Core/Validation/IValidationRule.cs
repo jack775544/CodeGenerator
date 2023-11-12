@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Generator.Core.Metamodel;
 
 namespace Generator.Core.Validation
 {
-	public interface IValidationRule<T> where T : IMetamodelNode
+	public interface IValidationRule<T>
 	{
 		T Model { get; set; }
 		ValidationResult Validate();

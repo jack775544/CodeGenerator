@@ -1,0 +1,29 @@
+<#@ template language="C#" inherits="AbstractTemplate<Entity>" #>
+<#@ import namespace="au.com.JackBot2MetaModel" #>
+<#@ import namespace="Generator.Core.Templates" #>
+<#@ import namespace="Emf.Utility" #>
+This is an entity called <#= Model.getName() #>
+
+It has the following attributes:
+<# foreach (var attribute in Model.getAttributes().GetEnumerable<au.com.JackBot2MetaModel.Attribute>()) { #>
+- <#= attribute.getName() #>
+<# } #>
+
+All NamedObjects are:
+<# foreach (var namedObject in _namedObjects) { #>
+* <#= namedObject.getName() ?? "Nothing" #>
+<# } #>
+<#+
+    private readonly IEnumerable<Entity> _entities;
+    private readonly IEnumerable<NamedObject> _namedObjects;
+
+    public override string OutputPath => $"{Model.getName()}.txt";
+
+    public override IEnumerable<Entity> MapObjects() => _entities;
+
+    public EntityTemplate(IEnumerable<Entity> entities, IEnumerable<NamedObject> namedObjects)
+    {
+        _entities = entities;
+        _namedObjects = namedObjects;
+    }
+#>

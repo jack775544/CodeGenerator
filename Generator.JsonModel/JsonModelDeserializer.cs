@@ -1,12 +1,10 @@
-﻿using Generator.Core.Metamodel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Generator.JsonModel
 {
 	public static class JsonModelDeserializer
 	{
 		public static T Deserialize<T>(string json)
-			where T : BaseModel
 		{
 			var settings = new JsonSerializerSettings
 			{

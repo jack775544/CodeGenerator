@@ -1,24 +1,23 @@
 ﻿using System;
 
-namespace Generator.ProtectedRegions
+namespace Generator.ProtectedRegions;
+
+internal static class ProtectedRegionHelpers
 {
-	public class ProtectedRegionHelpers
+	public static (int, int) FindProtectedRegionContentIndex(string contents, ProtectedRegion region)
 	{
-		public static (int, int) FindProtectedRegionContentIndex(string contents, ProtectedRegion region)
+		var startMatch = region.MakeStartRegex(false).Match(contents);
+		if (!startMatch.Success)
 		{
-			var startMatch = region.MakeStartRegex(false).Match(contents);
-			if (!startMatch.Success)
-			{
-				throw new InvalidOperationException("Unable to find protected region");
-			}
-
-			var endMatch = region.MakeEndRegex().Match(contents);
-			if (!startMatch.Success)
-			{
-				throw new InvalidOperationException("Unable to find protected region end");
-			}
-
-			return (startMatch.Index, (endMatch.Index + endMatch.Length) - startMatch.Index);
+			throw new InvalidOperationException("Unable to find protected region");
 		}
+
+		var endMatch = region.MakeEndRegex().Match(contents);
+		if (!startMatch.Success)
+		{
+			throw new InvalidOperationException("Unable to find protected region end");
+		}
+
+		return (startMatch.Index, (endMatch.Index + endMatch.Length) - startMatch.Index);
 	}
 }

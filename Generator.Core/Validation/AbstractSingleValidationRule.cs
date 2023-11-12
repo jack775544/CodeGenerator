@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Generator.Core.Metamodel;
 
 namespace Generator.Core.Validation
 {
-	public abstract class AbstractSingleValidationRule : AbstractValidationRule<BaseModel>
+	public abstract class AbstractSingleValidationRule : AbstractValidationRule<object>
 	{
-		public override IEnumerable<BaseModel> MapObjects()
+		public override IEnumerable<object> MapObjects()
 		{
-			return new BaseModel[] { null };
+			return new object[] { null };
 		}
 	}
 }

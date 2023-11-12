@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<JackBot2MetaModel:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:JackBot2MetaModel="cbmetamodel://core.codebots.tech/42d0b0d2-3dee-4025-b9a3-b8470a127678/latest" xmi:id="e1002654-e7fa-4e81-937f-05e40dc9d620">
+  <Entities xmi:id="d764b2d1-93c4-42b8-94c8-ce6a0dda84b9" Name="User">
+    <Attributes xsi:type="JackBot2MetaModel:AttributeString" xmi:id="70c63c76-8c9b-49c9-90b6-f8e47d17525f" Id="" Name="Name"/>
+    <Attributes xsi:type="JackBot2MetaModel:AttributeInteger" xmi:id="a4eca2ac-2e50-4f33-a8dc-7944be1fe012" Id="" Name="Year of Birth"/>
+  </Entities>
+  <Entities xmi:id="8efcc741-0583-4493-adb0-6d6e4fd7cbbf" Name="Shop">
+    <Attributes xsi:type="JackBot2MetaModel:AttributeString" xmi:id="b5dc0300-6268-45c3-b6f6-0076048d23f0" Name="Name"/>
+  </Entities>
+  <Entities xmi:id="bd65b399-5ed7-4877-be0b-1b67da225c46" Name="Product">
+    <Attributes xsi:type="JackBot2MetaModel:AttributeString" xmi:id="733a72e3-6f63-4613-b277-43ae44a42e23" Name="Name"/>
+    <Attributes xsi:type="JackBot2MetaModel:AttributeInteger" xmi:id="9931ad32-bd59-4c2a-a357-3026eba08eda" Name="Price"/>
+  </Entities>
+  <References xsi:type="JackBot2MetaModel:OneToMany" xmi:id="8f4b3fdf-b199-4999-83b7-623aed9c95ba" Source="8efcc741-0583-4493-adb0-6d6e4fd7cbbf" Target="bd65b399-5ed7-4877-be0b-1b67da225c46"/>
+  <References xsi:type="JackBot2MetaModel:ManyToMany" xmi:id="dd86b2af-318d-49b1-98ef-72e630691ed0" Name="Purchases" OppositeName="Purchased By" Source="d764b2d1-93c4-42b8-94c8-ce6a0dda84b9" Target="bd65b399-5ed7-4877-be0b-1b67da225c46"/>
+</JackBot2MetaModel:Root>

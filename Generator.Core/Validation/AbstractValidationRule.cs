@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Generator.Core.Metamodel;
 
 namespace Generator.Core.Validation
 {
-	public abstract class AbstractValidationRule<T> : IValidationRule<T> where T : IMetamodelNode
+	public abstract class AbstractValidationRule<T> : IValidationRule<T>
 	{
 		public T Model { get; set; }
 

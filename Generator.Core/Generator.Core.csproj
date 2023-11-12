@@ -1,31 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mono.TextTemplating" Version="2.2.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.8" />
+    <PackageReference Include="Mono.TextTemplating" Version="2.3.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Templates\BaseTemplate.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>BaseTemplate.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Templates\BaseTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BaseTemplate.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
 </Project>

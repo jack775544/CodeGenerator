@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="IKVM" Version="8.6.2"/>
+        <PackageReference Include="IKVM.Maven.Sdk" Version="1.5.5"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <MavenReference Include="org.eclipse.emf:org.eclipse.emf.ecore" Version="2.34.0"/>
+        <MavenReference Include="org.eclipse.emf:org.eclipse.emf.ecore.xmi" Version="2.18.0"/>
+        <MavenReference Include="org.eclipse.emf:org.eclipse.emf.common" Version="2.28.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Generator.Core\Generator.Core.csproj"/>
+    </ItemGroup>
+
+</Project>

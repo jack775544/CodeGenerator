@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Generator.Core.Hooks;
-using Generator.Core.Metamodel;
 using Generator.Core.Templates;
 using Generator.Core.Utility;
 using Generator.Core.Validation;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Generator.Core
 {
-	public class CodeGeneratorScope<T> : IServiceScope, IServiceProvider
+	public class CodeGeneratorScope : IServiceScope, IServiceProvider
 	{
 		private readonly IServiceScope _scope;
 		private readonly List<Type> _templateTypes;
@@ -46,7 +45,7 @@ namespace Generator.Core
 			return GenerateHelpers.Generate(template, _hooks, _scope.ServiceProvider);
 		}
 
-		public IEnumerable<ValidationResult> Validate<TModel>(IValidationRule<TModel> rule) where TModel : IMetamodelNode
+		public IEnumerable<ValidationResult> Validate<TModel>(IValidationRule<TModel> rule)
 		{
 			return GenerateHelpers.Validate(rule);
 		}

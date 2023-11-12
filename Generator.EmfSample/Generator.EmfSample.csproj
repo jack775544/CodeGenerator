@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Generator.Emf\Generator.Emf.csproj" />
+    <MavenReference Include="au.com:JackBot2MetaModel" Version="1.0-SNAPSHOT" />
+    <None Include="model.jackbotentity" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Templates\EntityTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\EntityTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EntityTemplate.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
